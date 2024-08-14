@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: model-deploy
+
+spec:
+
+  replicas: 10
+
+  selector:
+
+    matchLabels:
+
+      app: model-pod
+
+  revisionHistoryLimit: 5
+
+  progressDeadlineSeconds: 300
+
+  minReadySeconds: 10
+
+  strategy:
+
+    type: RollingUpdate
+
+    rollingUpdate:
+
+      maxUnavailable: 1
+
+      maxSurge: 1
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: model-pod
+
+    spec:
+
+      containers:
+
+      - name: model-ctr
+
+        image: dockerfile:latest
+
+        ports:
+
+        - containerPort: 8080
+
+        resources:
+
+          limits:
+
+            memory: 128Mi
+
+            cpu: 0.1
