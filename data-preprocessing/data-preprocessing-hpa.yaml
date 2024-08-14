@@ -9,4 +9,4 @@ spec:
     name: data-preprocessing-deployment
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 80e
+  targetCPUUtilizationPercentage: 80
