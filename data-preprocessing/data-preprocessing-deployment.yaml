@@ -30,9 +30,9 @@ spec:
             memory: 128Mi
             cpu: 0.1
         volumeMounts:
-        - mountPath: /data
-          name: vol-storage
+        - mountPath: /mnt/data
+          name: data-storage
       volumes:
-      - name: vol-storage
+      - name: data-storage
         persistentVolumeClaim:
-          claimName: pvc-pod
+          claimName: data-pvc

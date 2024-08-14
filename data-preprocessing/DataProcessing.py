@@ -86,11 +86,11 @@ def one_hot_encode(data, cat_cols):
     Returns:
     DataFrame: Data with one-hot encoded columns.
     """
-    ohe = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
+    ohe = OneHotEncoder(handle_unknown='ignore', sparse=False)
     ohe.fit(data[cat_cols])
     ohe_data = pd.DataFrame(
         ohe.transform(data[cat_cols]),
-        columns=ohe.get_feature_names_out(cat_cols),
+        columns=ohe.get_feature_names(cat_cols),
         index=data.index
     )
     return pd.concat([data, ohe_data], axis=1).drop(columns=cat_cols)
@@ -232,3 +232,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+from flask import Flask, send_file
+
+app = Flask(__name__)
+
+@app.route('/export_processed_data', methods=['GET'])
+def export_processed_data():
+    # Specify the path to your processed data file
+    file_path = 'processed_data/processed_data.csv'
+    return send_file(file_path, as_attachment=True)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080)
