@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Upgrade pip and install build dependencies
+# Upgrade pip and install the build dependencies
 RUN pip install --upgrade pip
 RUN apt-get update && \
     apt-get install -y build-essential libatlas-base-dev
