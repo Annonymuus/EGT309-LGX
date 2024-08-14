@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: model-pod
+spec:
+  containers:
+  - name: model-ctr
+    image: dockerfile:latest
+    ports:
+    - containerPort: 8080
